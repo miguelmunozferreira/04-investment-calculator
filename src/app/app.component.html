@@ -1,1 +1,5 @@
-<h1 class="center">Practice Time!</h1>
+<app-header></app-header>
+<app-user-input (calculateInvestment)="onCalculateInvestment($event)"></app-user-input>
+@if (investmentResult!==undefined){
+<app-investment-results [investmentResult]="investmentResult"></app-investment-results>
+}
