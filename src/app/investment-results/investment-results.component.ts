@@ -1,18 +1,16 @@
-import { Component, Input } from "@angular/core";
-import { InvestmentResult } from "./investment-results.model";
+import { Component, inject } from "@angular/core";
+import { CurrencyPipe } from "@angular/common";
+import { InvestmentService } from "../investment.service";
 
 @Component({
   selector: "app-investment-results",
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: "./investment-results.component.html",
   styleUrl: "./investment-results.component.css",
 })
 export class InvestmentResultsComponent {
-  formatter = new Intl.NumberFormat("en-US");
-  @Input({ required: true }) investmentResult!: Array<InvestmentResult>;
+  private investmentService = inject(InvestmentService);
 
-  formatNumber(value: number): string {
-    return this.formatter.format(value);
-  }
+  results = this.investmentService.resultData.asReadonly();
 }
